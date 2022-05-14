@@ -13,6 +13,11 @@
 			$paciente->Update($_POST);
 		//	cargaDatos($paciente);
 		}
+		if(isset($_POST['baja'])){
+			$paciente=new MyHospital();
+			$paciente->Destroy($_POST['idpaciente']);
+		//	cargaDatos($paciente);
+		}
 	?>
 	<h2>Mantenimiento paciente</h2>
 	<form id='formulario' method='post' action='#'>
