@@ -92,15 +92,18 @@ function validarDatos($datos){
 function cargaDatos($datos){
 
     global $nif;
-
+    global $idpaciente;
     global $nombre;
     global $apellidos;
     global $fechaingreso;
-   
+    global $fechaalta;
+
+    $idpaciente=$datos['idpaciente'];
     $nif=$datos['nif'];
     $nombre=$datos['nombre'];
     $apellidos=$datos['apellidos'];
     $fechaingreso=$datos['fechaingreso'];
+    $fechaalta=$datos['fechaalta'];
 }
 
 

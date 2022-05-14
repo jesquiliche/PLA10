@@ -4,6 +4,7 @@ $idpaciente=null;
 $nombre=null;
 $apellidos=null;
 $fechaingreso=null;
+$fechaalta=null;
 
 //definir un array con las opciones disponibles
 $secciones = ['alta', 'consulta', 'mantenimiento'];
