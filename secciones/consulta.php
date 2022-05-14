@@ -2,6 +2,7 @@
 		require_once "./models/MyHospitalDAO.php";
 		$hospital= new MyHospital();
 		$pacientes =$hospital->FindAll();
+	
 
 	?>
 	<h2>Consulta de pacientes</h2>
@@ -10,8 +11,6 @@
 			<th>Nif</th>
 			<th>Nombre</th>
 			<th>Apellidos</th>
-			<th>Fecha Ingreso</th>
-			<th>Fecha alta</th>
 		</tr>
 		<?php 
 			foreach($pacientes as $paciente){
@@ -20,13 +19,12 @@
 				echo "<td>$paciente[nombre]</td>";
 				
 				echo "<td>$paciente[apellidos]</td>";
-				$fecha=DateTime::createFromFormat("Y-m-d",$paciente["fechaingreso"])->format("d/m/Y");
-		
-				echo "<td>$fecha</td>";
-				if(!is_null($paciente["fechaalta"]))
-					$fecha=DateTime::createFromFormat("Y-m-d",$paciente["fechaalta"])->format("d/m/Y");
-				else $fecha="";
-				echo "<td>$fecha</td>";
+				echo "<td>";
+				echo "<form action='index?mantenimiento' method='post'>";
+				echo "<input type='hidden' name='idpaciente' value='$paciente[idpaciente]'>";
+				echo "<input type='submit' name='consulta' value='Detalle paciente'>";
+				echo "</form>";
+				echo "</td>";
 				echo "</tr>";
 			 }
 
