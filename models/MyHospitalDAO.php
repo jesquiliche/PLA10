@@ -19,7 +19,7 @@ final class MyHospital extends BaseDao{
         return $stmt->rowCount();
     }
 
-    public function IsModifiedRecord(int $id,$datosOrigin,&$nif):bool{
+    public function IsModifiedRecord(int $id,$datosOrigin,&$nif2):bool{
         $this->con=DBConnection::connect();
         $sql="SELECT * FROM ".$this->table. " WHERE ".$this->primaryKey."=?";
         $stmt = $this->con->prepare($sql);
