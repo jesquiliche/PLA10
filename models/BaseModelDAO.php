@@ -100,8 +100,6 @@ abstract class BaseDao implements ICrudDAO{
             $sqlUpdate.= " WHERE $this->primaryKey=".$obj[$this->primaryKey];
             
             $stmt=$this->con->prepare($sqlUpdate);
-            echo $sqlUpdate;
-            print_r($valores);
             return $stmt->execute($valores);
 
         }catch(Exception $e){

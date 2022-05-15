@@ -1,21 +1,39 @@
 	<?php
 		require_once "./models/MyHospitalDAO.php";
 		require_once "./utils/utils.php";
-		$paciente=null;
+		global $errores;
+		global $idpaciente;
+		$errores=array();
+		$mensaje="";
+	
 		if(isset($_POST['consulta'])){
 			$paciente=new MyHospital();
 			$paciente=$paciente->FindById($_POST['idpaciente']);
+			$idpaciente=$_POST['idpaciente'];
 			cargaDatos($paciente);
 		}
 		if(isset($_POST['modificacion'])){
-			$paciente=new MyHospital();
-			$paciente->setExclude('modificacion');
-			$paciente->Update($_POST);
+			$idpaciente=$_POST['idpaciente'];
+			if($idpaciente!==""){
+				if(validarDatos($_POST))  {
+					$paciente=new MyHospital();
+					$paciente->setExclude('modificacion');
+					$paciente->Update($_POST);
+					$mensaje="Modificación efectuada";
+				}
+			} else {
+				$mensaje="Debe seleccionar un paciente primero";
+			}
 		//	cargaDatos($paciente);
 		}
 		if(isset($_POST['baja'])){
 			$paciente=new MyHospital();
 			$paciente->Destroy($_POST['idpaciente']);
+			$paciente=null;
+			
+			cargaDatos($_POST);
+			$idpaciente=null;
+			$mensaje="Baja efectuada";
 		//	cargaDatos($paciente);
 		}
 	?>
@@ -41,5 +59,6 @@
 		<input type="submit" id="modificacion" name="modificacion" value='Modificar paciente' >
 		<input type="submit" id="baja" name="baja" value='Baja paciente' >
 		<br><br>
-		<h4></h4>
+		<h4><?=$mensaje?></h4>
+		<?php showErrors($errores); ?>
 	</form>
