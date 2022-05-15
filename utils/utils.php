@@ -104,12 +104,15 @@ function cargaDatos($datos){
     global $fechaingreso;
     global $fechaalta;
 
-    $idpaciente=$datos['idpaciente'];
+    if(isset($datos['idpaciente']))
+        $idpaciente=$datos['idpaciente'];
     $nif=$datos['nif'];
     $nombre=$datos['nombre'];
     $apellidos=$datos['apellidos'];
     $fechaingreso=$datos['fechaingreso'];
-    $fechaalta=$datos['fechaalta'];
+    if(!isset($datos['fechaalta']))
+        $fechaalta="0000-00-00";
+    else $fechaalta=$datos['fechaalta'];
 }
 
 

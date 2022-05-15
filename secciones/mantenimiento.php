@@ -21,14 +21,7 @@
 		
 
 		if(isset($_POST['baja'])){
-			$paciente=new MyHospital();
-			$paciente->Destroy($_POST['idpaciente']);
-			$paciente=null;
-			
-			cargaDatos($_POST);
-			$idpaciente=null;
-			$mensaje="Baja efectuada";
-		//	cargaDatos($paciente);
+			baja();
 		}
 	?>
 	<h2>Mantenimiento paciente</h2>

@@ -7,9 +7,10 @@ function modificacion(){
         if($idpaciente!=="" && $idpaciente!==null){
             if(validarDatos($_POST))  {
                 $paciente=new MyHospital();
-                $modificaciones=$paciente->IsModifiedRecord($_POST['idpaciente'],$_POST,$nif2);
+                $nif2=null;
+                $modificaciones=$paciente->IsModifiedRecord(intval($_POST['idpaciente']),$_POST,$nif2);
                 //Si nif2 llega informado es que se ha cambiado el nif
-                if($nif2==null) {
+                if($nif2!==null) {
                     if($paciente->FindByNif($nif2)>0)
                         $mensaje="Nif ya existe en la base de datos";
                         return 0;
@@ -30,8 +31,23 @@ function modificacion(){
             if($e->getCode()==23000) 
                 $mensaje="Paciente ya existe en la BB.DD";
         }
-
-
     }
+function baja(){
+    global $mensaje;
+    global $idpaciente;
+    $idpaciente=$_POST['idpaciente'];
 
+    if($idpaciente!=="" && $idpaciente!==null){
+        $paciente=new MyHospital();
+        $paciente->Destroy($_POST['idpaciente']);
+        $paciente=null;
+        
+        cargaDatos($_POST);
+        $idpaciente=null;
+        $mensaje="Baja efectuada";
+    //	cargaDatos($paciente);
+    }else{
+        $mensaje="Debe seleccionar un paciente primero";
+    }
+}
 

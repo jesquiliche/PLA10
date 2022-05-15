@@ -52,7 +52,7 @@ abstract class BaseDao implements ICrudDAO{
                 if($key!==$this->exclude){
                     $valor= filter_var($valor,FILTER_SANITIZE_ADD_SLASHES);
                     $sqlInsert.="$key,";
-                    $valores[]=$valor;
+                    $valores[]=trim($valor);
                     $sqlValues.="?,";
                 }
             }
@@ -70,7 +70,9 @@ abstract class BaseDao implements ICrudDAO{
         }
         
     }
-
+    
+    //Recibimos un array asociativo con los nombres de los camps
+    //y sus respectivos valores
     public function Update($obj):int{
         try{
             $this->con=DBConnection::connect();
@@ -82,10 +84,9 @@ abstract class BaseDao implements ICrudDAO{
             
                 foreach($obj as $key=>$valor){
                     if($key!==$this->exclude){        
-                    $valor=$obj[$key];
+                    $valor=trim($obj[$key]);
                     $valor= filter_var($valor, FILTER_SANITIZE_ADD_SLASHES);
                 
-                    
                     //Si no es el campo clave actualizar
                     if($key!=$this->primaryKey){
                         //Construir el values a partir del tipo de dato
@@ -108,6 +109,7 @@ abstract class BaseDao implements ICrudDAO{
         }
     }
 
+    //Devolver todas las filas de la tabla
     public function FindAll():array{
         $this->con=DBConnection::connect();
         $sql="SELECT * FROM ".$this->table;
@@ -115,10 +117,10 @@ abstract class BaseDao implements ICrudDAO{
             $sql.=" ORDER BY ".$this->orderBy;
         }
         $stmt = $this->con->query($sql);
-    
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //Buscar por eñ id
     public function FindById($id):array{
         $this->con=DBConnection::connect();
     
@@ -129,6 +131,7 @@ abstract class BaseDao implements ICrudDAO{
         return $stmt->fetch();
     }
 
+    //borrar registro
     public function Destroy($id):int{
         $this->con=DBConnection::connect();
         $stmt = $this->con->prepare("DELETE FROM $this->table WHERE $this->primaryKey=$id");
