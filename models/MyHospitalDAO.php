@@ -30,7 +30,7 @@ final class MyHospital extends BaseDao{
             if($key!==$this->exclude && $key!=="timestamp"){
              //   $valor= filter_var($valor,FILTER_SANITIZE_ADD_SLASHES);
                 if($valor!=$datosOrigin[$key]){
-                    if($datos['nif']!=$datosOrigin['nif']) $nif2=$datos['nif'];
+                    if($datos[$key]!=$datosOrigin[$key]) $nif2=$datos['nif'];
                     return true;
                 }
             }

@@ -1,6 +1,8 @@
 	<?php
 		require_once "./models/MyHospitalDAO.php";
 		require_once "./utils/utils.php";
+		require_once "./funciones/funxiones.php";
+
 		global $errores;
 		global $idpaciente;
 		$errores=array();
@@ -12,20 +14,12 @@
 			$idpaciente=$_POST['idpaciente'];
 			cargaDatos($paciente);
 		}
+
 		if(isset($_POST['modificacion'])){
-			$idpaciente=$_POST['idpaciente'];
-			if($idpaciente!==""){
-				if(validarDatos($_POST))  {
-					$paciente=new MyHospital();
-					$paciente->setExclude('modificacion');
-					$paciente->Update($_POST);
-					$mensaje="Modificación efectuada";
-				}
-			} else {
-				$mensaje="Debe seleccionar un paciente primero";
-			}
-		//	cargaDatos($paciente);
+			modificacion();
 		}
+		
+
 		if(isset($_POST['baja'])){
 			$paciente=new MyHospital();
 			$paciente->Destroy($_POST['idpaciente']);
@@ -54,11 +48,14 @@
 		<input type="date" id="fechaingreso" name="fechaingreso" value='<?=$fechaingreso?>'>
 		<br><br>
 		<label>Fecha Alta Médica:</label>
-		<input type="date" id="fechaalta" name="fechaalta">
+		<input type="date" id="fechaalta" name="fechaalta" value='<?=$fechaalta?>'>
 		<br><br>
 		<input type="submit" id="modificacion" name="modificacion" value='Modificar paciente' >
 		<input type="submit" id="baja" name="baja" value='Baja paciente' >
 		<br><br>
 		<h4><?=$mensaje?></h4>
-		<?php showErrors($errores); ?>
+		<div>
+			<?php showErrors($errores); ?>
+		</div>
+	
 	</form>

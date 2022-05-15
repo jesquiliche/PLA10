@@ -5,6 +5,7 @@ $nombre=null;
 $apellidos=null;
 $fechaingreso=null;
 $fechaalta=null;
+$mensaje="";
 
 //definir un array con las opciones disponibles
 $secciones = ['alta', 'consulta', 'mantenimiento'];

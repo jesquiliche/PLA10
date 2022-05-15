@@ -62,8 +62,13 @@ function validarDatos($datos){
     global $nombre;
     global $apellidos;
     global $fechaingreso;
+    global $fechaalta;
+    global $idpaciente;
+    error_reporting(0);
 
- //   $idpaciente=$datos["idpaciente"];
+    $idpaciente=$datos["idpaciente"];
+    $fechaalta=$datos["fechaalta"];
+    if($fechaalta=="" || $fechaalta==null) $fechaalta="0000-00-00";
     
     $nif=$datos["nif"];
     if(!isset($nif) || isEmpty($nif)){
