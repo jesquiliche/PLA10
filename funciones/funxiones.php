@@ -4,7 +4,7 @@ function modificacion(){
     $nif2=null;
     $idpaciente=$_POST['idpaciente'];
     try{
-        if($idpaciente!==""){
+        if($idpaciente!=="" && $idpaciente!==null){
             if(validarDatos($_POST))  {
                 $paciente=new MyHospital();
                 $modificaciones=$paciente->IsModifiedRecord($_POST['idpaciente'],$_POST,$nif2);

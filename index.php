@@ -5,6 +5,7 @@ $nombre=null;
 $apellidos=null;
 $fechaingreso=null;
 $fechaalta=null;
+$nif="";
 $mensaje="";
 
 //definir un array con las opciones disponibles

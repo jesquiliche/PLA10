@@ -64,6 +64,7 @@ function validarDatos($datos){
     global $fechaingreso;
     global $fechaalta;
     global $idpaciente;
+    $nif="";
     error_reporting(0);
 
     $idpaciente=$datos["idpaciente"];

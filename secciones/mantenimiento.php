@@ -33,7 +33,7 @@
 	?>
 	<h2>Mantenimiento paciente</h2>
 	<form id='formulario' method='post' action='#'>
-		<?=$idpaciente?>;
+	
 		<input type="hidden" id='idpaciente' name='idpaciente' value=<?=$idpaciente?>>
 		<label>NIF:</label>
 		<input type="text" id="nif" name="nif" value='<?=$nif?>'>
